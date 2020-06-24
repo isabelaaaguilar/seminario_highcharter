@@ -1,0 +1,53 @@
+#MathJax-Element-1-Frame {
+    font-size: 16px !important;
+}
+
+
+img {
+    width: 910px
+}
+
+h1 {
+    font-size: 38px;
+}
+
+
+#MathJax-Element-1-Frame {
+  font-size: 22px;
+}
+
+h2 {
+    background-color: #3da783;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+h3 {
+   
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+}
+
+
+h4.author {
+    font-size: 18px;
+
+
+}
+h1
+{
+ background-color: #317eac;
+color:#FFF;
+text-align:center;
+padding:5px;
+}
+h4.date {
+    font-size: 18px;
+
+}
+
+.dataTables_wrapper{
+  font-size: 12px;
+}

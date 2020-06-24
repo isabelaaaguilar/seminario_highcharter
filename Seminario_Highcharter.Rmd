@@ -1,0 +1,32 @@
+---
+title: ''
+author: ''
+date: ''
+output:
+  pdf_document: default
+  html_document:
+    css: styles.css
+    highlight: tango
+    theme: cerulean
+---
+<style>
+p
+{
+font-size:20px;
+line-heigth:25px;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Highcharter {.tabset .tabset-fade .tabset-pills}
+
+## Conceito
+
+Pacote para a biblioteca Highcharts em JavaScript que oferece uma série de funções com a finalidade de facilitar a produção de gráficos e objetos dentro do R. 
+<https://www.require-r.com/tutorials/highcharter/>
+<https://rstudio-pubs-static.s3.amazonaws.com/416276_629b1efa9d48426e921db06cbacd3776.html>
+
+## Including Plots
