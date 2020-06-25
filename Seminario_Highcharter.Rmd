@@ -16,60 +16,107 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=ls())
-library(highcharter)
+require(openxlsx)
+require(data.table)
 require(tidyverse)
 require(readxl)
 require(knitr)
+library(kableExtra)
+library(highcharter)
+require(SDMTools)
+require(DT)
+library(heatmaply)
+require(htmltools)
+require(RColorBrewer)
+library(magrittr)
+WorldPhones<-WorldPhones %>% data.frame()
+WorldPhones<-WorldPhones %>% dplyr::mutate(Anos=c("1951","1956","1957","1958","1959","1960","1961")) 
+dados_mapa <- get_data_from_map(download_map_data("countries/br/br-all"))
+color<- viridis(20)
 
-dados<-read.csv("dados/estados.csv")
+dados_ficticios <- dados_mapa %>% 
+  select(code = `hc-a2`) %>% 
+  mutate(value = sample(50:70,27,TRUE))
 ```
+
 <!-- <https://www.require-r.com/tutorials/highcharter/> -->
 <!-- <https://rstudio-pubs-static.s3.amazonaws.com/416276_629b1efa9d48426e921db06cbacd3776.html> -->
 
 ## Introdução
 
-Pacote para a biblioteca Highcharts em JavaScript que oferece uma série de funções com a finalidade de facilitar a produção de gráficos e objetos dentro do R. 
+  O *Highcharter* é um pacote para a biblioteca Highcharts em JavaScript que oferece uma série de funções com a finalidade de facilitar a produção de gráficos e objetos dentro do R. 
 
-Para que possa utilizá-lo é necessário instalar o pacote: 
+  Para que possa utilizá-lo é necessário instalar o pacote: 
 
 
 ```{}
 install.packages("highcharter")
 ```
 
-
 ## ```hchart()```
 
-A função ```hchart()``` é responsável pela construção desses gráficos com um simples comando. Como a criação desses gráficos é feita em camadas conseguimos facilmente entender o seu funcionamento por meio de pequenos exemplos. 
+  A função ```hchart()``` é responsável pela construção desses gráficos. Eles são contruídos em camadas, o que facilita o entendendimento de seu funcionamento por meio de pequenos exemplos. O operador pipe ``` %>% ```  pode ser utilizado para conectar as funcões do ```Highcharter```, uma vez que, como cada função gerará uma nova camada, isso significa que cada função depende do resultado obtido pela anterior, o que justifica o uso desse operador para facilitar a construção do gráfico.
 
 <div class = "row">
 <div class = "col-md-12">
 
+```{r}
+head(citytemp)
+```
+
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-head(dados)
+hchart(citytemp,'column', hcaes(x = month, y = new_york))
 ```
-```
-hchart(citytemp,'column', hcaes(x = Meses, y = New_York))
 
-```
-</div>
-<div class = "col-md-12">
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-
-hchart(dados,'column', hcaes(x = uf, y = ))
-    
-```
 </div>
 </div>
-### "Traduçao"
+## "Traduçao"
 
-Para "traduzir" gráficos escritos em JavaScript para o R basta adicionar ```hc_``` antes de cada função e substituir ```:{}``` por ```()```
+  Para "traduzir" gráficos escritos em JavaScript para o R basta adicionar ```hc_``` antes de cada função, substituir ```:{}``` por ```()``` e ```[]``` por ```c()```
 
+## Exemplos 
 
-<div class = "row">
-<div class = "col-md-6">
+### Gráfico de linha
+
+```{r warning=FALSE}
+hchart(citytemp,'line', hcaes(x=citytemp$month, y=citytemp$new_york)) %>% 
+  hc_title(text = "Gráfico sobre a variação anual de temperatura em Nova York") %>% 
+  hc_xAxis(title= list(text= "Meses do ano ")) %>%
+  hc_yAxis(title= list(text="Variação de Temperatura ")) %>% 
+  hc_add_theme(hc_theme_darkunica())
 ```
 
+### Gráfico de área
+
+```{r}
+head(WorldPhones)
 ```
-</div>
-</div>
+
+```{r warning=FALSE}
+hchart(WorldPhones,'area', hcaes(x=Anos, y=WorldPhones$S.Amer)) %>% 
+  hc_title(text = "Gráfico sobre o aumento do uso de telefones na América do Sul") %>% 
+  hc_xAxis(title= list(text= "Anos")) %>%
+  hc_yAxis(title= list(text="Quantidade de Telefones ")) %>% 
+  hc_colors(colors = 'green')
+
+```
+
+### Mapas
+
+Usamos a função ```hcmap()``` para traçar um mapa a partir dos mapas disponíveis na biblioteca Highcharts
+
+```{r}
+hcmap(map = "countries/br/br-all", showInLegend= FALSE) %>%
+  hc_title(text = "Mapa do Brasil")
+```
+
+```{r  warning=FALSE}
+hcmap("countries/br/br-all", data = dados_ficticios, value = "value",
+      joinBy = c("hc-a2", "code"), name= "Valor",
+      dataLabels = list(enabled = TRUE, format = '{point.code}')) %>%
+  hc_title(text = "Brasil") %>%
+  hc_colors(colors = color) 
+```
+
+
