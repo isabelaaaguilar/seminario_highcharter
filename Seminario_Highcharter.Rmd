@@ -1,32 +1,75 @@
 ---
-title: ''
-author: ''
-date: ''
-output:
-  pdf_document: default
+title: 'Highcharter'
+author: 'Isabela Aguilar'
+date: '26 de Junho de 2020'
+output: 
   html_document:
-    css: styles.css
-    highlight: tango
-    theme: cerulean
+    toc: true
+    toc_depth: 5
+    toc_float: 
+      collapsed: false
+      smooth_scroll: true
 ---
-<style>
-p
-{
-font-size:20px;
-line-heigth:25px;
-}
-</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=ls())
+library(highcharter)
+require(tidyverse)
+require(readxl)
+require(knitr)
 
-# Highcharter {.tabset .tabset-fade .tabset-pills}
+dados<-read.csv("dados/estados.csv")
+```
+<!-- <https://www.require-r.com/tutorials/highcharter/> -->
+<!-- <https://rstudio-pubs-static.s3.amazonaws.com/416276_629b1efa9d48426e921db06cbacd3776.html> -->
 
-## Conceito
+## Introdução
 
 Pacote para a biblioteca Highcharts em JavaScript que oferece uma série de funções com a finalidade de facilitar a produção de gráficos e objetos dentro do R. 
-<https://www.require-r.com/tutorials/highcharter/>
-<https://rstudio-pubs-static.s3.amazonaws.com/416276_629b1efa9d48426e921db06cbacd3776.html>
 
-## Including Plots
+Para que possa utilizá-lo é necessário instalar o pacote: 
+
+
+```{}
+install.packages("highcharter")
+```
+
+
+## ```hchart()```
+
+A função ```hchart()``` é responsável pela construção desses gráficos com um simples comando. Como a criação desses gráficos é feita em camadas conseguimos facilmente entender o seu funcionamento por meio de pequenos exemplos. 
+
+<div class = "row">
+<div class = "col-md-12">
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+head(dados)
+```
+```
+hchart(citytemp,'column', hcaes(x = Meses, y = New_York))
+
+```
+</div>
+<div class = "col-md-12">
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+hchart(dados,'column', hcaes(x = uf, y = ))
+    
+```
+</div>
+</div>
+### "Traduçao"
+
+Para "traduzir" gráficos escritos em JavaScript para o R basta adicionar ```hc_``` antes de cada função e substituir ```:{}``` por ```()```
+
+
+<div class = "row">
+<div class = "col-md-6">
+```
+
+```
+</div>
+</div>

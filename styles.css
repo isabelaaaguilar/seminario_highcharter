@@ -1,53 +1,25 @@
-#MathJax-Element-1-Frame {
-    font-size: 16px !important;
-}
-
-
-img {
-    width: 910px
-}
-
-h1 {
-    font-size: 38px;
-}
-
-
-#MathJax-Element-1-Frame {
-  font-size: 22px;
-}
-
-h2 {
-    background-color: #3da783;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-
-h3 {
-   
-    padding-top: 12px;
-    padding-bottom: 12px;
-
-}
-
-
-h4.author {
-    font-size: 18px;
-
-
-}
-h1
+p
 {
- background-color: #317eac;
-color:#FFF;
-text-align:center;
-padding:5px;
-}
-h4.date {
-    font-size: 18px;
-
+font-size:20px;
+line-heigth:25px;
 }
 
-.dataTables_wrapper{
-  font-size: 12px;
+.nav-pills>li>a
+{
+    text-align:center;
+  background-color:green;
+  color:#FFF;
+  padding:10px;
+}
+.nav-pills>li>a:hover
+{
+    text-align:center;
+  background-color:white;
+  color:#0f5f0f;
+  padding:10px;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus
+{
+      text-align:center;
+  background-color:#0f5f0f;
 }
