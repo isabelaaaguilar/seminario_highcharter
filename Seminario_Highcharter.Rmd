@@ -55,7 +55,7 @@ install.packages("highcharter")
 
 ## ```hchart()```   ```highchart()```
 
-  As funções ```hchart()``` e ```highchart()``` são responsáveis pela construção desses objetos no R. Eles são contruídos em camadas, o que facilita o entendendimento de seu funcionamento por meio de pequenos exemplos. O operador pipe ``` %>% ```  pode ser utilizado para conectar as funcões do **highcharter**, uma vez que, como cada função gerará uma nova camada, isso significa que cada função depende do resultado obtido pela anterior, o que justifica o uso desse operador para facilitar a construção do gráfico.
+  As funções ```hchart()``` e ```highchart()``` são responsáveis pela construção desses objetos no R. Eles são contruídos em camadas, o que facilita o entendimento de seu funcionamento por meio de pequenos exemplos. O operador pipe ``` %>% ```  pode ser utilizado para conectar as funcões do **highcharter**, uma vez que, como cada função gerará uma nova camada, isso significa que cada função depende do resultado obtido pela anterior, o que justifica o uso desse operador para facilitar a construção do gráfico.
 
 <div class = "row">
 <div class = "col-md-12">
