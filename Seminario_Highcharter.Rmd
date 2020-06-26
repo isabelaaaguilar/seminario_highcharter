@@ -44,7 +44,7 @@ dados_ficticios <- dados_mapa %>%
 
 ## Introdução
 
-  O **Highcharter** é um pacote para a biblioteca [Highcharts](https://www.highcharts.com/) para poder em JavaScript que oferece uma série de funções com a finalidade de facilitar a produção de gráficos e objetos dentro do R. 
+  O **Highcharter** é um pacote para a biblioteca [Highcharts](https://www.highcharts.com/) em JavaScript. Ele oferece uma série de funções com a finalidade de facilitar a produção de gráficos e objetos dentro do R. 
 
   Para que possa utilizá-lo é necessário instalar o pacote: 
 
@@ -55,7 +55,7 @@ install.packages("highcharter")
 
 ## ```hchart()```   ```highchart()```
 
-  A função ```hchart()``` é responsável pela construção desses gráficos. Eles são contruídos em camadas, o que facilita o entendendimento de seu funcionamento por meio de pequenos exemplos. O operador pipe ``` %>% ```  pode ser utilizado para conectar as funcões do ```Highcharter```, uma vez que, como cada função gerará uma nova camada, isso significa que cada função depende do resultado obtido pela anterior, o que justifica o uso desse operador para facilitar a construção do gráfico.
+  As funções ```hchart()``` e ```highchart()``` são responsáveis pela construção desses objetos no R. Eles são contruídos em camadas, o que facilita o entendendimento de seu funcionamento por meio de pequenos exemplos. O operador pipe ``` %>% ```  pode ser utilizado para conectar as funcões do **highcharter**, uma vez que, como cada função gerará uma nova camada, isso significa que cada função depende do resultado obtido pela anterior, o que justifica o uso desse operador para facilitar a construção do gráfico.
 
 <div class = "row">
 <div class = "col-md-12">
@@ -65,15 +65,16 @@ head(citytemp)
 ```
 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r warning=FALSE}
 hchart(citytemp,'column', hcaes(x = month, y = new_york))
 ```
 
 </div>
 </div>
-## "Traduçao"
 
-  Para "traduzir" gráficos escritos em JavaScript para o R basta adicionar ```hc_``` antes de cada função, substituir ```:{}``` por ```()``` e ```[]``` por ```c()```
+## De JavaScript para o R
+
+  Para "traduzir" gráficos escritos em JavaScript para o R basta adicionar `hc_` antes de cada função, substituir `:{}` por `()` e `[]` por `c()`
 
 ## Exemplos 
 
@@ -81,7 +82,7 @@ hchart(citytemp,'column', hcaes(x = month, y = new_york))
 
 ```{r warning=FALSE}
 hchart(citytemp,'line', hcaes(x=citytemp$month, y=citytemp$new_york)) %>% 
-  hc_title(text = "Gráfico sobre a variação anual de temperatura em Nova York") %>% 
+  hc_title(text = "Gráfico sobre a variação mensal de temperatura em Nova York") %>% 
   hc_xAxis(title= list(text= "Meses do ano ")) %>%
   hc_yAxis(title= list(text="Variação de Temperatura ")) %>% 
   hc_add_theme(hc_theme_darkunica())
@@ -95,7 +96,7 @@ head(WorldPhones)
 
 ```{r warning=FALSE}
 hchart(WorldPhones,'area', hcaes(x=Anos, y=WorldPhones$S.Amer)) %>% 
-  hc_title(text = "Gráfico sobre o aumento do uso de telefones na América do Sul") %>% 
+  hc_title(text = "Gráfico sobre o aumento do número de telefones na América do Sul") %>% 
   hc_xAxis(title= list(text= "Anos")) %>%
   hc_yAxis(title= list(text="Quantidade de Telefones ")) %>% 
   hc_tooltip(pointFormat = "Telefones: {point.y}")
@@ -104,7 +105,7 @@ hchart(WorldPhones,'area', hcaes(x=Anos, y=WorldPhones$S.Amer)) %>%
 
 ### Mapas
 
-Usamos a função ```hcmap()``` para traçar um mapa a partir dos mapas disponíveis na biblioteca Highcharts
+Usamos a função ```hcmap()``` para traçar um mapa a partir de dados de mapas disponíveis na biblioteca Highcharts
 
 ```{r}
 hcmap(map = "countries/br/br-all", showInLegend= FALSE) %>%
@@ -119,4 +120,7 @@ hcmap("countries/br/br-all", data = dados_ficticios, value = "value",
   hc_colors(colors = color) 
 ```
 
+## Shiny
+
+Para exibição desses gráficos no Shiny basta utilizar duas funções `highchartOutput` e `renderHighchart`
 
