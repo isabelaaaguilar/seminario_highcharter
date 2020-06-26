@@ -32,7 +32,6 @@ library(magrittr)
 WorldPhones<-WorldPhones %>% data.frame()
 WorldPhones<-WorldPhones %>% dplyr::mutate(Anos=c("1951","1956","1957","1958","1959","1960","1961")) 
 dados_mapa <- get_data_from_map(download_map_data("countries/br/br-all"))
-color<- viridis(20)
 
 dados_ficticios <- dados_mapa %>% 
   select(code = `hc-a2`) %>% 
@@ -99,7 +98,8 @@ hchart(WorldPhones,'area', hcaes(x=Anos, y=WorldPhones$S.Amer)) %>%
   hc_title(text = "Gráfico sobre o aumento do número de telefones na América do Sul") %>% 
   hc_xAxis(title= list(text= "Anos")) %>%
   hc_yAxis(title= list(text="Quantidade de Telefones ")) %>% 
-  hc_tooltip(pointFormat = "Telefones: {point.y}")
+  hc_tooltip(pointFormat = "Telefones: {point.y}") %>% 
+  hc_colors(colors = "green")
 
 ```
 
@@ -116,11 +116,17 @@ hcmap(map = "countries/br/br-all", showInLegend= FALSE) %>%
 hcmap("countries/br/br-all", data = dados_ficticios, value = "value",
       joinBy = c("hc-a2", "code"), name= "Valor",
       dataLabels = list(enabled = TRUE, format = '{point.code}')) %>%
-  hc_title(text = "Brasil") %>%
-  hc_colors(colors = color) 
+  hc_title(text = "Brasil") 
 ```
 
 ## Shiny
 
 Para exibição desses gráficos no Shiny basta utilizar duas funções `highchartOutput` e `renderHighchart`
 
+## Alguns links úteis
+
+- https://www.highcharts.com/
+- http://jkunst.com/highcharter/
+- https://github.com/jbkunst/highcharter
+- https://www.highcharts.com/blog/tutorials/highcharts-for-r-users/
+- https://www.datacamp.com/community/tutorials/data-visualization-highcharter-r
