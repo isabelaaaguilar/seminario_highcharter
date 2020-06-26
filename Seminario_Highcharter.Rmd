@@ -44,7 +44,7 @@ dados_ficticios <- dados_mapa %>%
 
 ## Introdução
 
-  O *Highcharter* é um pacote para a biblioteca Highcharts em JavaScript que oferece uma série de funções com a finalidade de facilitar a produção de gráficos e objetos dentro do R. 
+  O **Highcharter** é um pacote para a biblioteca [Highcharts](https://www.highcharts.com/) para poder em JavaScript que oferece uma série de funções com a finalidade de facilitar a produção de gráficos e objetos dentro do R. 
 
   Para que possa utilizá-lo é necessário instalar o pacote: 
 
@@ -53,7 +53,7 @@ dados_ficticios <- dados_mapa %>%
 install.packages("highcharter")
 ```
 
-## ```hchart()```
+## ```hchart()```   ```highchart()```
 
   A função ```hchart()``` é responsável pela construção desses gráficos. Eles são contruídos em camadas, o que facilita o entendendimento de seu funcionamento por meio de pequenos exemplos. O operador pipe ``` %>% ```  pode ser utilizado para conectar as funcões do ```Highcharter```, uma vez que, como cada função gerará uma nova camada, isso significa que cada função depende do resultado obtido pela anterior, o que justifica o uso desse operador para facilitar a construção do gráfico.
 
@@ -98,7 +98,7 @@ hchart(WorldPhones,'area', hcaes(x=Anos, y=WorldPhones$S.Amer)) %>%
   hc_title(text = "Gráfico sobre o aumento do uso de telefones na América do Sul") %>% 
   hc_xAxis(title= list(text= "Anos")) %>%
   hc_yAxis(title= list(text="Quantidade de Telefones ")) %>% 
-  hc_colors(colors = 'green')
+  hc_tooltip(pointFormat = "Telefones: {point.y}")
 
 ```
 
